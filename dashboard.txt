@@ -1,0 +1,99 @@
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: PatientDashboard(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class PatientDashboard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Patient Dashboard'),
+        backgroundColor: Colors.blue,
+      ),
+
+      body: Padding(
+        padding: EdgeInsets.all(16),
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            // Heading
+            Text(
+              'Patient Information',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            Text('Welcome to the Hospital Dashboard'),
+
+            SizedBox(height: 20),
+
+            // Patient Details
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(15),
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade100,
+                borderRadius: BorderRadius.circular(15),
+              ),
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Patient Name: Arun'),
+                  Text('Patient ID: P101'),
+                  Text('Age: 35'),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            // Icons Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Icon(Icons.person, size: 35, color: Colors.blue),
+                Icon(Icons.medical_services, size: 35, color: Colors.green),
+                Icon(Icons.local_hospital, size: 35, color: Colors.red),
+              ],
+            ),
+
+            SizedBox(height: 20),
+
+            // Doctor Card
+            Card(
+              child: ListTile(
+                leading: Icon(Icons.person),
+                title: Text('Assigned Doctor'),
+                subtitle: Text('Dr. Kumar'),
+              ),
+            ),
+
+            // Room Number Card
+            Card(
+              child: ListTile(
+                leading: Icon(Icons.meeting_room),
+                title: Text('Room Number'),
+                subtitle: Text('205'),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}

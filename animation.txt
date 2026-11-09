@@ -1,55 +1,61 @@
 
 import 'package:flutter/material.dart';
-void main(){
-  runApp(MyApp);
 
+void main() {
+  runApp(MaterialApp(
+    home: TrafficSignal(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
-class MyApp extends StatelessWidget{
-  MyApp({super.key});
-  Widget build(BuildeContext context){
-    return MaterialApp(
-      home:antima(),
-     debugShowCheckedModeBanner: false,
-    );
-  }
-}
-class antima extends StatefulWidget{
-  antima({super.key});
-  State<antima> createState()=>_antimaState();
- 
-}
-class _antimaState extends State<antima>{
-  bool isGreen =false;
-  void change(){
-    setState((){
-      isGreen=!isGreen;
 
+class TrafficSignal extends StatefulWidget {
+  @override
+  State<TrafficSignal> createState() => _TrafficSignalState();
+}
+
+class _TrafficSignalState extends State<TrafficSignal> {
+
+  // Initial values
+  bool isGreen = false;
+
+  // Change Signal
+  void changeSignal() {
+    setState(() {
+      isGreen = !isGreen;
     });
   }
- Widget build(BuildContext context){
-  return Scaffold(
-    appBar:AppBar(
-      title:Text(
-        'Traffic Signal Animation',
-      centerTitle:true,
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Traffic Signal Animation'),
       ),
-      body:Center(
-        child:Column(
-          children:[
-            AntimatedContainer(
-              duration:Duration(seconds:1),
-              width:isGreen?200:150,
-              height:isGreen?200:150,
-              colors:isGreen?Colors.green:Colors.red,
+
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            // Animated Container
+            AnimatedContainer(
+              duration: Duration(seconds: 1),
+              width: isGreen ? 200 : 150,
+              height: isGreen ? 200 : 150,
+              color: isGreen ? Colors.green : Colors.red,
             ),
+
+            SizedBox(height: 30),
+
+            // Button
             ElevatedButton(
-              onPressed:change,
-              child:Text('Change Signal'),
+              onPressed: changeSignal,
+              child: Text('Change Signal'),
             ),
+
           ],
         ),
       ),
-  );
- }
+    );
+  }
 }
-

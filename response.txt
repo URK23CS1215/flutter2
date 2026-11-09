@@ -1,0 +1,73 @@
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: RestaurantMenu(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class RestaurantMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Restaurant Menu'),
+        backgroundColor: Colors.orange,
+      ),
+
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+
+          // Create food cards
+          Widget burger = Card(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Text('Burger - Rs.120'),
+            ),
+          );
+
+          Widget pizza = Card(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Text('Pizza - Rs.200'),
+            ),
+          );
+
+          Widget sandwich = Card(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Text('Sandwich - Rs.80'),
+            ),
+          );
+
+          // Check screen width
+          if (constraints.maxWidth < 600) {
+
+            // Mobile View
+            return Column(
+              children: [
+                burger,
+                pizza,
+                sandwich,
+              ],
+            );
+
+          } else {
+
+            // Desktop View
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(child: burger),
+                Expanded(child: pizza),
+                Expanded(child: sandwich),
+              ],
+            );
+          }
+        },
+      ),
+    );
+  }
+}

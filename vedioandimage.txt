@@ -1,0 +1,121 @@
+
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+void main() {
+  runApp(const MediaApp());
+}
+
+class MediaApp extends StatelessWidget {
+  const MediaApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MediaDemo(),
+    );
+  }
+}
+
+class MediaDemo extends StatefulWidget {
+  const MediaDemo({super.key});
+
+  @override
+  State<MediaDemo> createState() => _MediaDemoState();
+}
+
+class _MediaDemoState extends State<MediaDemo> {
+  late VideoPlayerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = VideoPlayerController.asset(
+      'assets/video/sample.mp4',
+    );
+
+    controller.initialize().then((_) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Assets and Media'),
+      ),
+
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              const Text(
+                'Hello World',
+                style: TextStyle(fontSize: 28),
+              ),
+
+              const SizedBox(height: 20),
+
+              const Text('Image Asset'),
+
+              Image.asset(
+                'assets/images/image1.png',
+                width: 200,
+                height: 200,
+              ),
+
+              const SizedBox(height: 30),
+
+              const Text('Video Asset'),
+
+              controller.value.isInitialized
+                  ? AspectRatio(
+                      aspectRatio: controller.value.aspectRatio,
+                      child: VideoPlayer(controller),
+                    )
+                  : const CircularProgressIndicator(),
+
+              const SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    if (controller.value.isPlaying) {
+                      controller.pause();
+                    } else {
+                      controller.play();
+                    }
+                  });
+                },
+                child: Text(
+                  controller.value.isPlaying
+                      ? 'Pause Video'
+                      : 'Play Video',
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/video/
+
+    flutter pub get

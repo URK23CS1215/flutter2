@@ -1,0 +1,99 @@
+import 'package:flutter/material.dart';
+import 'home.dart';
+import 'product.dart';
+void main(){
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget{
+  MyApp({super.key});
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      home:home_page(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+home.dart:
+import 'package:flutter/material.dart';
+import 'product.dart';
+class home_page extends StatelessWidget{
+    home_page({super.key});
+    Widget build(BuildContext context){
+        return Scaffold(
+            appBar:AppBar(
+                title:Text('Stationery Shopping App'),
+
+            ),
+            body:Center(
+                child:Column(
+                    children:[
+                        Text('Welcome to Stationery Shopping App',
+                        style:TextStyle(
+                        fontSize:20,
+                        fontWeight:FontWeight.bold
+                        ),
+                        ),
+                        ElevatedButton(
+                            onPressed:(){
+                                Navigator.push(context,MaterialPageRoute(
+                                    builder:(context)=>product_page(),
+                                ),
+                                );
+                            },
+                            child:Text('View product'),
+                        ),
+                    ],
+                ),
+            ),
+        );
+
+    }
+}
+
+product.dart:
+
+import 'package:flutter/material.dart';
+class product_page extends StatelessWidget{
+    product_page({super.key});
+    Widget build(BuildContext context){
+        return Scaffold(
+            appBar:AppBar(
+                title:Text('Product details'),
+
+            ),
+            body:Center(
+                child:Column(
+                    children:[
+                        Card(
+                            child:ListTile(
+                                title:Text('Notebook - Rs.50'),
+
+                            ),
+                        ),
+                        Card(
+                            child:ListTile(
+                                title:Text('Pen - Rs.10 '),
+
+                            ),
+                        ),
+                         Card(
+                            child:ListTile(
+                                title:Text('Pencil - Rs.5 '),
+
+                            ),
+                        ),
+                        ElevatedButton(
+                            onPressed:(){
+                                Navigator.pop(context);
+                            },
+                            child:Text('back'),
+                        ),
+                    ],
+                ),
+            ),
+        );
+
+    }
+}

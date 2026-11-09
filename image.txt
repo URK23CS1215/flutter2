@@ -1,0 +1,94 @@
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: TouristGallery(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class TouristGallery extends StatelessWidget {
+
+  // Tourist places list
+  final List<Map<String, String>> places = [
+    {
+      'name': 'Ooty',
+      'image': 'assets/images/ooty.jpg',
+    },
+    {
+      'name': 'Kodaikanal',
+      'image': 'assets/images/kodaikanal.jpg',
+    },
+    {
+      'name': 'Kanyakumari',
+      'image': 'assets/images/kanyakumari.jpg',
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Tamil Nadu Tourism Gallery'),
+        backgroundColor: Colors.blue,
+      ),
+
+      body: Padding(
+        padding: EdgeInsets.all(10),
+
+        child: GridView.builder(
+          itemCount: places.length,
+
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+
+          itemBuilder: (context, index) {
+            return Card(
+              child: Column(
+                children: [
+
+                  // Display Image
+                  Expanded(
+                    child: Image.asset(
+                      places[index]['image']!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+
+                  // Display Place Name
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      places[index]['name']!,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+yaml:
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+flutter pub get
