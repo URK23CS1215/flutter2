@@ -3,3 +3,4 @@ flutter create my_app
 cd my_app
 code .
 flutter run
+flutter run -d chrome
