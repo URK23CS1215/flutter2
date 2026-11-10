@@ -2,67 +2,88 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: RestaurantMenu(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: RestaurantMenu(),
+    );
+  }
 }
 
 class RestaurantMenu extends StatelessWidget {
+  const RestaurantMenu({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Restaurant Menu'),
+        title: const Text('Restaurant Menu'),
         backgroundColor: Colors.orange,
       ),
 
       body: LayoutBuilder(
         builder: (context, constraints) {
 
-          // Create food cards
-          Widget burger = Card(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text('Burger - Rs.120'),
-            ),
-          );
-
-          Widget pizza = Card(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text('Pizza - Rs.200'),
-            ),
-          );
-
-          Widget sandwich = Card(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text('Sandwich - Rs.80'),
-            ),
-          );
-
-          // Check screen width
           if (constraints.maxWidth < 600) {
 
-            // Mobile View
+            // Mobile Layout
             return Column(
               children: [
-                burger,
-                pizza,
-                sandwich,
+                Card(
+                  child: ListTile(
+                    title: const Text('Burger - Rs.120'),
+                  ),
+                ),
+
+                Card(
+                  child: ListTile(
+                    title: const Text('Pizza - Rs.200'),
+                  ),
+                ),
+
+                Card(
+                  child: ListTile(
+                    title: const Text('Sandwich - Rs.80'),
+                  ),
+                ),
               ],
             );
 
           } else {
 
-            // Desktop View
+            // Desktop / Tablet Layout
             return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(child: burger),
-                Expanded(child: pizza),
-                Expanded(child: sandwich),
+                Expanded(
+                  child: Card(
+                    child: ListTile(
+                      title: const Text('Burger - Rs.120'),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: Card(
+                    child: ListTile(
+                      title: const Text('Pizza - Rs.200'),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: Card(
+                    child: ListTile(
+                      title: const Text('Sandwich - Rs.80'),
+                    ),
+                  ),
+                ),
               ],
             );
           }
